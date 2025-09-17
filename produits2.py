@@ -252,16 +252,18 @@ def create_logo():
         #st.error(f"Erreur lors du chargement: {str(e)}")
         #return None
 
-def load_excel_file(file_path):
+@st.cache_data
+def load_excel_file():
     try:
-        df = pd.read_excel(file_path, engine='openpyxl')
+        # Remplacez VOTRE_FILE_ID par l'ID réel de votre fichier Google Drive
+        file_id = "17uUaAP1E7DHOeHaD-I1OiFxRI5_3LHf3"  # ⚠️ À remplacer !
+        url = f"https://docs.google.com/spreadsheets/d/{file_id}/export?format=xlsx"
+        df = pd.read_excel(url, engine='openpyxl')
         return df
-    except FileNotFoundError:
-        st.error(f"Fichier introuvable : {file_path}")
-        return None
     except Exception as e:
-        st.error(f"Erreur lors du chargement: {str(e)}")
+        st.error(f"Erreur lors du chargement : {str(e)}")
         return None
+
 
 def filter_products(df, search_term):
     if search_term:
@@ -390,7 +392,7 @@ def main():
         #help="Téléchargez votre fichier STOCK.xlsx"
     #)
 
-    df = load_excel_file("STOCK.xlsx")
+    df = load_excel_file()
 
     if df is not None:
 
