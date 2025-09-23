@@ -11,6 +11,9 @@ from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfutils
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
+from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.units import cm
+
 
 # Configuration de la page
 st.set_page_config(
@@ -256,7 +259,7 @@ def create_logo():
 def load_excel_file():
     try:
         # Remplacez VOTRE_FILE_ID par l'ID réel de votre fichier Google Drive
-        file_id = "17uUaAP1E7DHOeHaD-I1OiFxRI5_3LHf3"  # ⚠️ À remplacer !
+        file_id = "1EiRnzahX4Bbr3gSB20PoYq4X97itSFyQ"  # ⚠️ À remplacer !
         url = f"https://docs.google.com/spreadsheets/d/{file_id}/export?format=xlsx"
         df = pd.read_excel(url, engine='openpyxl')
         return df
@@ -306,7 +309,15 @@ def generate_pdf_content(selected_products, lang):
         return None
     
     buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    # Changement 1: Format paysage pour plus d'espace horizontal
+    doc = SimpleDocTemplate(
+        buffer, 
+        pagesize=landscape(A4),  # Format paysage
+        rightMargin=1*cm,        # Marges réduites
+        leftMargin=1*cm,
+        topMargin=2*cm,
+        bottomMargin=2*cm
+    )
     elements = []
     styles = getSampleStyleSheet()
     
@@ -322,7 +333,7 @@ def generate_pdf_content(selected_products, lang):
     
     # Titre du document
     title = Paragraph("CASAMERCHANTS", title_style)
-    subtitle = Paragraph(get_text('selected_products'), styles['Heading2'])
+    subtitle = Paragraph(get_text('selected_products', lang), styles['Heading2'])
     elements.append(title)
     elements.append(subtitle)
     elements.append(Spacer(1, 20))
@@ -334,30 +345,68 @@ def generate_pdf_content(selected_products, lang):
         first_product = selected_products[0]['data']
         for col in first_product.index:
             headers.append(str(col))
-        headers.append(get_text('quantity'))
+        headers.append(get_text('quantity', lang))
         
-        # Données
+        # Changement 2: Gérer le texte long dans les cellules
         table_data = [headers]
         for i, product in enumerate(selected_products, 1):
             row = [str(i)]
             for value in product['data'].values:
-                row.append(str(value))
+                # Découper le texte long
+                text_value = str(value)
+                if len(text_value) > 25:  # Si le texte est trop long
+                    wrapped_text = wrap_text(text_value, 25)
+                    row.append(wrapped_text)
+                else:
+                    row.append(text_value)
             row.append(str(product['quantity']))
             table_data.append(row)
         
-        # Créer le tableau
-        table = Table(table_data)
+        # Changement 3: Calculer les largeurs de colonnes dynamiquement
+        num_cols = len(headers)
+        page_width = landscape(A4)[0] - 2*cm  # Largeur disponible
+        
+        # Répartition des largeurs selon le type de colonne
+        col_widths = []
+        for i, header in enumerate(headers):
+            if i == 0:  # Colonne N°
+                col_widths.append(page_width * 0.08)
+            elif header == get_text('quantity', lang):  # Colonne Quantité
+                col_widths.append(page_width * 0.12)
+            else:  # Autres colonnes
+                remaining_width = page_width * 0.8  # 80% restant
+                other_cols = num_cols - 2  # Exclure N° et Quantité
+                col_widths.append(remaining_width / other_cols)
+        
+        # Créer le tableau avec largeurs personnalisées
+        table = Table(table_data, colWidths=col_widths, repeatRows=1)
+        
+        # Changement 4: Style amélioré pour le tableau
         table.setStyle(TableStyle([
+            # En-têtes
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#020066')),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),  # Alignement à gauche pour mieux lire
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, 0), 12),
-            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('FONTSIZE', (0, 0), (-1, 0), 10),  # Taille réduite pour plus de colonnes
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+            
+            # Contenu
             ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
             ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            ('FONTSIZE', (0, 1), (-1, -1), 10),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.lightgrey])
+            ('FONTSIZE', (0, 1), (-1, -1), 8),  # Taille réduite pour le contenu
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.lightgrey]),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),  # Alignement vertical en haut
+            
+            # Espacement des cellules
+            ('TOPPADDING', (0, 1), (-1, -1), 4),
+            ('BOTTOMPADDING', (0, 1), (-1, -1), 4),
+            ('LEFTPADDING', (0, 0), (-1, -1), 4),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 4),
+            
+            # Centrer les colonnes N° et Quantité
+            ('ALIGN', (0, 0), (0, -1), 'CENTER'),  # Colonne N°
+            ('ALIGN', (-1, 0), (-1, -1), 'CENTER'),  # Dernière colonne (Quantité)
         ]))
         
         elements.append(table)
@@ -365,6 +414,34 @@ def generate_pdf_content(selected_products, lang):
     doc.build(elements)
     buffer.seek(0)
     return buffer
+
+def wrap_text(text, max_length):
+    """
+    Découpe le texte en plusieurs lignes si nécessaire
+    """
+    if not text or len(text) <= max_length:
+        return text
+    
+    words = text.split()
+    lines = []
+    current_line = []
+    current_length = 0
+    
+    for word in words:
+        if current_length + len(word) + 1 <= max_length:
+            current_line.append(word)
+            current_length += len(word) + 1
+        else:
+            if current_line:
+                lines.append(' '.join(current_line))
+            current_line = [word]
+            current_length = len(word)
+    
+    if current_line:
+        lines.append(' '.join(current_line))
+    
+    return '\n'.join(lines)
+
 
 # Interface principale
 def main():
@@ -555,7 +632,8 @@ def main():
             
             with col2:
                 product_name = str(selected_product['data'].iloc[0]) if len(selected_product['data']) > 0 else f"Produit {i+1}"
-                st.write(f"**{product_name}** - Qté: {selected_product['quantity']}")
+                product_designation = str(selected_product['data'].iloc[1]) if len(selected_product['data']) > 0 else f"Produit {i+1}"
+                st.write(f"**{product_name}** - {product_designation} - Qté: {selected_product['quantity']}")
             
             #with col3:
                 #if st.button(f"✏️", key=f"modify_{i}", help=get_text('modify', lang)):
