@@ -259,7 +259,7 @@ def create_logo():
 def load_excel_file():
     try:
         # Remplacez VOTRE_FILE_ID par l'ID réel de votre fichier Google Drive
-        file_id = "1EiRnzahX4Bbr3gSB20PoYq4X97itSFyQ"  # ⚠️ À remplacer !
+        file_id = "12e7nQrpQUHYKbFS4VtoNjNskn1lPMW34"  # ⚠️ À remplacer !
         url = f"https://docs.google.com/spreadsheets/d/{file_id}/export?format=xlsx"
         df = pd.read_excel(url, engine='openpyxl')
         return df
@@ -269,11 +269,27 @@ def load_excel_file():
 
 
 def filter_products(df, search_term):
-    if search_term:
-        # Recherche dans toutes les colonnes de type string
-        mask = df.astype(str).apply(lambda x: x.str.contains(search_term, case=False, na=False)).any(axis=1)
+        if not search_term:
+            return df
+
+        search_term = search_term.strip().lower()
+        
+        # Convertir toutes les colonnes en string minuscules pour la recherche
+        df_search = df.astype(str).apply(lambda x: x.str.lower())
+        
+        # Concaténer toutes les colonnes en une seule string pour chaque ligne
+        combined_text = df_search.apply(lambda row: ' '.join(row.values), axis=1)
+        
+        # Diviser le terme de recherche en mots
+        search_words = search_term.split()
+        
+        # Vérifier que tous les mots sont présents dans chaque ligne
+        mask = pd.Series([True] * len(combined_text), index=combined_text.index)
+        
+        for word in search_words:
+            mask = mask & combined_text.str.contains(word, na=False)
+        
         return df[mask]
-    return df
 
 def paginate_dataframe(df, page_size=50):
     total_pages = math.ceil(len(df) / page_size)
@@ -477,10 +493,18 @@ def main():
         st.success(f"✅ {get_text('file_up', lang)}")
         
         # Barre de recherche
+        search_help = """
+        **Exemples :**
+        - `coude 63` → produits avec "coude" ET "63"
+        - `pvc 32` → produits avec "pvc" ET "32"
+        """
+
         search_term = st.text_input(
             "🔍 " + get_text('search_placeholder', lang),
-            placeholder=get_text('search_placeholder', lang)
+            placeholder="",
+            help=search_help
         )
+
 
         # Filtrer les produits
         filtered_df = filter_products(df, search_term)
