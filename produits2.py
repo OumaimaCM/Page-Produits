@@ -320,11 +320,6 @@ if 'forms' not in st.session_state:
             'department': 'Informatique'
         },
         {
-            'name': 'Demande de Formulaire',
-            'url': 'https://zfrmz.com/3vqoalYB2gp4uejgBK29',
-            'department': 'Informatique'
-        },
-        {
             'name': 'Rapport Technique',
             'url': 'https://zfrmz.com/hnxgBvtyTnP8ymEofkMH',
             'department': 'Technique'
@@ -337,11 +332,6 @@ if 'forms' not in st.session_state:
         {
             'name': 'Demande de Service (Intervention/Réclamations)',
             'url': 'https://zfrmz.com/gagnnRFcU8CuwCuwCuwC',
-            'department': 'Commercial'
-        },
-        {
-            'name': 'Demande de Visite Chantier',
-            'url': 'https://zfrmz.com/DSOMs9vrV6G4wI14DBl0',
             'department': 'Commercial'
         },
         {
