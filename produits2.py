@@ -26,6 +26,10 @@ st.set_page_config(
 # CSS personnalisé avec la couleur #020066
 st.markdown("""
 <style>
+    div[role=radiogroup] label p {
+        font-weight: bold;
+        font-size: 16px;
+    }
     .css-1emrehy.edgvbvh3 {  /* classe par défaut des download_button, peut varier selon version Streamlit */
         background-color: #1D6F42 !important;
         color: white !important;
@@ -128,6 +132,31 @@ st.markdown("""
         top: 0;
         z-index: 10;
     }
+    
+    .form-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        background-color: #f8f9fa;
+        transition: transform 0.2s;
+    }
+    
+    .form-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .form-link {
+        color: #020066 !important;
+        text-decoration: none !important;
+        font-weight: bold;
+    }
+    
+    .form-link:hover {
+        color: #0066CC !important;
+        text-decoration: none;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -161,7 +190,24 @@ translations = {
         'no_products_found': 'Aucun produit trouvé.',
         'product_added': 'Produit ajouté avec succès!',
         'product_deleted': 'Produit supprimé!',
-        'product_modified': 'Produit modifié!'
+        'product_modified': 'Produit modifié!',
+        'navigation': 'Navigation',
+        'menu_pricipal': 'Menu Principal',
+        'forms': 'Formulaires',
+        'product_list': 'Liste des produits',
+        'department_filter': 'Filtrer par département',
+        'form_name_filter': 'Filtrer par nom de formulaire',
+        'all_departments': 'Tous les départements',
+        'all_forms': 'Tous les formulaires',
+        'add_new_form': 'Ajouter un nouveau formulaire',
+        'form_url': 'URL du formulaire',
+        'form_name': 'Nom du formulaire',
+        'form_department': 'Département',
+        'add_form': 'Ajouter le formulaire',
+        'form_added': 'Formulaire ajouté avec succès!',
+        'no_forms': 'Aucun formulaire trouvé.',
+        'available_forms': 'Formulaires disponibles',
+        'filter_form': 'Rechercher un formulaire'
     },
     'en': {
         'title': 'Stock Management - CasaMerchants',
@@ -191,7 +237,24 @@ translations = {
         'no_products_found': 'No products found.',
         'product_added': 'Product added successfully!',
         'product_deleted': 'Product deleted!',
-        'product_modified': 'Product modified!'
+        'product_modified': 'Product modified!',
+        'navigation': 'Navigation',
+        'menu_pricipal': 'Menu Principal',
+        'forms': 'Forms',
+        'product_list': 'Product List',
+        'department_filter': 'Filter by department',
+        'form_name_filter': 'Filter by form name',
+        'all_departments': 'All departments',
+        'all_forms': 'All forms',
+        'add_new_form': 'Add new form',
+        'form_url': 'Form URL',
+        'form_name': 'Form name',
+        'form_department': 'Department',
+        'add_form': 'Add form',
+        'form_added': 'Form added successfully!',
+        'no_forms': 'No forms found.',
+        'available_forms': 'Available forms',
+        'filter_form': 'Search for a form'
     },
     'ar': {
         'title': 'إدارة المخزون ',
@@ -221,7 +284,24 @@ translations = {
         'no_products_found': 'لم يتم العثور على منتجات.',
         'product_added': 'تم إضافة المنتج بنجاح!',
         'product_deleted': 'تم حذف المنتج!',
-        'product_modified': 'تم تعديل المنتج!'
+        'product_modified': 'تم تعديل المنتج!',
+        'navigation': 'التنقل',
+        'menu_pricipal': 'Menu Principal',
+        'forms': 'النماذج',
+        'product_list': 'قائمة المنتجات',
+        'department_filter': 'تصفية حسب القسم',
+        'form_name_filter': 'تصفية حسب اسم النموذج',
+        'all_departments': 'جميع الأقسام',
+        'all_forms': 'جميع النماذج',
+        'add_new_form': 'إضافة نموذج جديد',
+        'form_url': 'رابط النموذج',
+        'form_name': 'اسم النموذج',
+        'form_department': 'القسم',
+        'add_form': 'إضافة النموذج',
+        'form_added': 'تم إضافة النموذج بنجاح!',
+        'no_forms': 'لم يتم العثور على نماذج.',
+        'available_forms': 'النماذج المتاحة',
+        'filter_form': 'البحث عن نموذج'
     }
 }
 
@@ -232,6 +312,126 @@ if 'current_page' not in st.session_state:
     st.session_state.current_page = 1
 if 'confirm_delete' not in st.session_state:
     st.session_state.confirm_delete = None
+if 'forms' not in st.session_state:
+    st.session_state.forms = [
+        {
+            'name': 'Demande de Support Informatique',
+            'url': 'https://zfrmz.com/bEuwz08buVRD52deDgpb',
+            'department': 'Informatique'
+        },
+        {
+            'name': 'Demande de Formulaire',
+            'url': 'https://zfrmz.com/3vqoalYB2gp4uejgBK29',
+            'department': 'Informatique'
+        },
+        {
+            'name': 'Rapport Technique',
+            'url': 'https://zfrmz.com/hnxgBvtyTnP8ymEofkMH',
+            'department': 'Technique'
+        },
+        {
+            'name': 'Demande Produits au Chantier  OU Retour de Produits du Chantier au Dépôt',
+            'url': 'https://zfrmz.com/h2GHZod7VUhVMhThLZi7',
+            'department': 'Technique'
+        },
+        {
+            'name': 'Demande de Service (Intervention/Réclamations)',
+            'url': 'https://zfrmz.com/gagnnRFcU8CuwCuwCuwC',
+            'department': 'Commercial'
+        },
+        {
+            'name': 'Demande de Visite Chantier',
+            'url': 'https://zfrmz.com/DSOMs9vrV6G4wI14DBl0',
+            'department': 'Commercial'
+        },
+        {
+            'name': 'Demande de Frais de Déplacement & Ordre de Mission',
+            'url': 'https://zfrmz.com/Te6XEXGxjKW80et1mht0',
+            'department': 'Finance'
+        },
+        {
+            'name': 'Demande de Paiement',
+            'url': 'https://zfrmz.com/yzrW5FVZNIKPJlAqyqz1',
+            'department': 'Finance'
+        },
+        {
+            'name': 'Demande de Bon de Sortie',
+            'url': 'https://zfrmz.com/48CB9obtGEPHYc3UnoyC',
+            'department': 'Finance'
+        },
+        {
+            'name': 'Demande de Caution',
+            'url': 'https://zfrmz.com/R0FSbvaxkHNiCSHnvuEP',
+            'department': 'Finance'
+        },
+        {
+            'name': 'Demande Administrative (Doc, Outils, Matériel, et Autres)',
+            'url': 'https://zfrmz.com/hNIRaVTC2H5HOQouJwz5',
+            'department': 'Administration'
+        },
+        {
+            'name': 'Demande de Transport',
+            'url': 'https://zfrmz.com/NRiTK4x9x0S0TMrmLI6A',
+            'department': 'Administration'
+        },
+        {
+            'name': 'Nomination pour Carte BRAVO',
+            'url': 'https://zfrmz.com/JlCTv238EYqCWZnHMwCS',
+            'department': 'Ressources Humaines'
+        },
+        {
+            'name': 'Demande d\'Absence',
+            'url': 'https://zfrmz.com/Df4aHzkKSo8OBdT5ryGF',
+            'department': 'Ressources Humaines'
+        },
+        {
+            'name': 'Demande Avance sur Salaire ou Prêt',
+            'url': 'https://zfrmz.com/0F83UCA3UhRZebTERnua',
+            'department': 'Ressources Humaines'
+        },
+        {
+            'name': 'Demande de Travail d\'heures Récupérables',
+            'url': 'https://zfrmz.com/w35SdDczMTYxAyA5G6Xj',
+            'department': 'Ressources Humaines'
+        },
+        {
+            'name': 'Demande d\'Analyse',
+            'url': 'https://zfrmz.com/2ocyTaFusPErZadBvM9F',
+            'department': 'Gestion de Projets'
+        },
+        {
+            'name': 'Demande de Changement Projet',
+            'url': 'https://zfrmz.com/rmlXpUlWgTS4iZXdRdJu',
+            'department': 'Ingénierie'
+        },
+        {
+            'name': 'Demande de Devis Projet',
+            'url': 'https://zfrmz.com/ddBAQJtO09q16xVvM8Jf',
+            'department': 'Commercial'
+        },
+        {
+            'name': 'Réclamation Fournisseurs / Banques / Autres Partenaires',
+            'url': 'https://zfrmz.com/Te6XEXGxjKW80et1mht0',
+            'department': 'Achats'
+        },
+        {
+            'name': 'Boite à Idées / Améliorations',
+            'url': 'https://zfrmz.com/Jo5qWsfncA5DChmBDJ4i',
+            'department': 'Excellence Opérationnelle'
+        },
+        {
+            'name': 'Demande de Mise à jour de Procédure',
+            'url': 'https://zfrmz.com/plxIjuxrYpHOGf8g4jLe',
+            'department': 'Excellence Opérationnelle'
+        },
+        {
+            'name': 'Non-conformité',
+            'url': 'https://zfrmz.com/Zy5qQZWFVjLMsd3K15SG',
+            'department': 'Excellence Opérationnelle'
+        }
+    ]
+if 'current_page_nav' not in st.session_state:
+    st.session_state.current_page_nav = "LISTE DES PRODUITS"
 
 def get_text(key, lang='fr'):
     return translations[lang].get(key, key)
@@ -458,9 +658,63 @@ def wrap_text(text, max_length):
     
     return '\n'.join(lines)
 
+def show_forms_page(lang):
+   # st.markdown(f"## 📋 {get_text('forms', lang)}")
+    # Logo et en-tête
+    st.markdown(create_logo(), unsafe_allow_html=True)
 
-# Interface principale
-def main():
+    st.markdown(f"""
+    <div class="main-header">
+        <h1>{get_text('forms', lang)}</h1>
+    </div>
+    """, unsafe_allow_html=True)
+    # Filtres
+    col1, col2 = st.columns(2)
+    
+    
+    with col1:
+        form_search = st.text_input(
+            f"🔍 {get_text('filter_form', lang)}",
+            placeholder="Rechercher un formulaire..."
+        )
+
+    with col2:
+        departments = [get_text('all_departments', lang)] + list(set(form['department'] for form in st.session_state.forms))
+        selected_department = st.selectbox(
+            get_text('department_filter', lang),
+            departments
+        )
+    
+    # Filtrer les formulaires
+    filtered_forms = st.session_state.forms.copy()
+    
+    # Filtre par département
+    if selected_department != get_text('all_departments', lang):
+        filtered_forms = [form for form in filtered_forms if form['department'] == selected_department]
+    
+    # Filtre par recherche de texte
+    if form_search:
+        search_term = form_search.lower().strip()
+        filtered_forms = [form for form in filtered_forms 
+                         if search_term in form['name'].lower() 
+                         or search_term in form['department'].lower()]
+    
+    # Afficher les formulaires filtrés
+    st.markdown(f"### {get_text('available_forms', lang)}")
+    
+    if filtered_forms:
+        for i, form in enumerate(filtered_forms):
+            with st.container():
+                st.markdown(f"""
+                <div class="form-card">
+                    <h4><a href="{form['url']}" target="_blank" class="form-link">{form['name']}</a></h4>
+                </div>
+                """, unsafe_allow_html=True)
+    else:
+        st.info(f"📝 {get_text('no_forms', lang)}")
+    
+
+def show_product_list_page(lang):
     # Logo et en-tête
     st.markdown(create_logo(), unsafe_allow_html=True)
     
@@ -683,6 +937,26 @@ def main():
                         st.rerun()
             
             st.divider()
+
+# Interface principale
+def main():
+    # Navigation
+    st.sidebar.markdown(f"## 📋 {get_text('menu_pricipal', lang='fr')}")
+    
+    page = st.sidebar.radio(
+        "Navigation",
+        ["LISTE DES PRODUITS", "FORMULAIRES"],
+        index=0 if st.session_state.current_page_nav == "LISTE DES PRODUITS" else 1,label_visibility="collapsed"
+    )
+    
+    # Mettre à jour la page courante
+    st.session_state.current_page_nav = page
+    
+    # Afficher la page sélectionnée
+    if page == "FORMULAIRES":
+        show_forms_page('fr')
+    else:
+        show_product_list_page('fr')
 
 if __name__ == "__main__":
     main()
