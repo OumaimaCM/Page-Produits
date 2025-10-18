@@ -239,7 +239,7 @@ translations = {
         'product_deleted': 'Product deleted!',
         'product_modified': 'Product modified!',
         'navigation': 'Navigation',
-        'menu_pricipal': 'Menu Principal',
+        'menu_pricipal': 'Main Menu',
         'forms': 'Forms',
         'product_list': 'Product List',
         'department_filter': 'Filter by department',
@@ -286,7 +286,7 @@ translations = {
         'product_deleted': 'تم حذف المنتج!',
         'product_modified': 'تم تعديل المنتج!',
         'navigation': 'التنقل',
-        'menu_pricipal': 'Menu Principal',
+        'menu_pricipal': 'القائمة الرئيسية',
         'forms': 'النماذج',
         'product_list': 'قائمة المنتجات',
         'department_filter': 'تصفية حسب القسم',
@@ -305,6 +305,179 @@ translations = {
     }
 }
 
+# Traductions des formulaires
+form_translations = {
+    'Demande de Support Informatique': {
+        'fr': 'Demande de Support Informatique',
+        'en': 'IT Support Request',
+        'ar': 'طلب الدعم الفني'
+    },
+    #'Demande de Formulaire': {
+     #   'fr': 'Demande de Formulaire',
+      #  'en': 'Form Request',
+       # 'ar': 'طلب نموذج'
+    #},
+    'Rapport Technique': {
+        'fr': 'Rapport Technique',
+        'en': 'Technical Report',
+        'ar': 'تقرير فني'
+    },
+    'Demande Produits au Chantier  OU Retour de Produits du Chantier au Dépôt': {
+        'fr': 'Demande Produits au Chantier OU Retour de Produits du Chantier au Dépôt',
+        'en': 'Product Request to Site OR Product Return from Site to Warehouse',
+        'ar': 'طلب منتجات للموقع أو إرجاع المنتجات من الموقع إلى المستودع'
+    },
+    'Demande de Service (Intervention/Réclamations)': {
+        'fr': 'Demande de Service (Intervention/Réclamations)',
+        'en': 'Service Request (Intervention/Claims)',
+        'ar': 'طلب خدمة (تدخل/شكاوى)'
+    },
+    #'Demande de Visite Chantier': {
+     #   'fr': 'Demande de Visite Chantier',
+      #  'en': 'Site Visit Request',
+       # 'ar': 'طلب زيارة موقع'
+    #},
+    'Demande de Frais de Déplacement & Ordre de Mission': {
+        'fr': 'Demande de Frais de Déplacement & Ordre de Mission',
+        'en': 'Travel Expenses & Mission Order Request',
+        'ar': 'طلب مصاريف التنقل وأمر المهمة'
+    },
+    'Demande de Paiement': {
+        'fr': 'Demande de Paiement',
+        'en': 'Payment Request',
+        'ar': 'طلب دفع'
+    },
+    'Demande de Bon de Sortie': {
+        'fr': 'Demande de Bon de Sortie',
+        'en': 'Exit Slip Request',
+        'ar': 'طلب سند خروج'
+    },
+    'Demande de Caution': {
+        'fr': 'Demande de Caution',
+        'en': 'Guarantee Request',
+        'ar': 'طلب ضمان'
+    },
+    'Demande Administrative (Doc, Outils, Matériel, et Autres)': {
+        'fr': 'Demande Administrative (Doc, Outils, Matériel, et Autres)',
+        'en': 'Administrative Request (Doc, Tools, Equipment, and Others)',
+        'ar': 'طلب إداري (وثائق، أدوات، معدات وأخرى)'
+    },
+    'Demande de Transport': {
+        'fr': 'Demande de Transport',
+        'en': 'Transport Request',
+        'ar': 'طلب نقل'
+    },
+    'Nomination pour Carte BRAVO': {
+        'fr': 'Nomination pour Carte BRAVO',
+        'en': 'BRAVO Card Nomination',
+        'ar': 'ترشيح لبطاقة برافو'
+    },
+    "Demande d'Absence": {
+        'fr': "Demande d'Absence",
+        'en': 'Leave Request',
+        'ar': 'طلب غياب'
+    },
+    'Demande Avance sur Salaire ou Prêt': {
+        'fr': 'Demande Avance sur Salaire ou Prêt',
+        'en': 'Salary Advance or Loan Request',
+        'ar': 'طلب سلفة على الراتب أو قرض'
+    },
+    "Demande de Travail d'heures Récupérables": {
+        'fr': "Demande de Travail d'heures Récupérables",
+        'en': 'Recoverable Hours Work Request',
+        'ar': 'طلب عمل ساعات قابلة للاسترداد'
+    },
+    "Demande d'Analyse": {
+        'fr': "Demande d'Analyse",
+        'en': 'Analysis Request',
+        'ar': 'طلب تحليل'
+    },
+    'Demande de Changement Projet': {
+        'fr': 'Demande de Changement Projet',
+        'en': 'Project Change Request',
+        'ar': 'طلب تغيير المشروع'
+    },
+    'Demande de Devis Projet': {
+        'fr': 'Demande de Devis Projet',
+        'en': 'Project Quote Request',
+        'ar': 'طلب عرض سعر المشروع'
+    },
+    'Réclamation Fournisseurs / Banques / Autres Partenaires': {
+        'fr': 'Réclamation Fournisseurs / Banques / Autres Partenaires',
+        'en': 'Suppliers / Banks / Other Partners Complaint',
+        'ar': 'شكوى الموردين/البنوك/شركاء آخرين'
+    },
+    'Boite à Idées / Améliorations': {
+        'fr': 'Boite à Idées / Améliorations',
+        'en': 'Suggestion Box / Improvements',
+        'ar': 'صندوق الأفكار/التحسينات'
+    },
+    'Demande de Mise à jour de Procédure': {
+        'fr': 'Demande de Mise à jour de Procédure',
+        'en': 'Procedure Update Request',
+        'ar': 'طلب تحديث الإجراءات'
+    },
+    'Non-conformité': {
+        'fr': 'Non-conformité',
+        'en': 'Non-compliance',
+        'ar': 'عدم المطابقة'
+    }
+}
+
+# Traductions des départements
+department_translations = {
+    'Informatique': {
+        'fr': 'Informatique',
+        'en': 'IT',
+        'ar': 'تكنولوجيا المعلومات'
+    },
+    'Technique': {
+        'fr': 'Technique',
+        'en': 'Technical',
+        'ar': 'تقني'
+    },
+    'Commercial': {
+        'fr': 'Commercial',
+        'en': 'Commercial',
+        'ar': 'تجاري'
+    },
+    'Finance': {
+        'fr': 'Finance',
+        'en': 'Finance',
+        'ar': 'مالية'
+    },
+    'Administration': {
+        'fr': 'Administration',
+        'en': 'Administration',
+        'ar': 'إدارة'
+    },
+    'Ressources Humaines': {
+        'fr': 'Ressources Humaines',
+        'en': 'Human Resources',
+        'ar': 'الموارد البشرية'
+    },
+    'Gestion de Projets': {
+        'fr': 'Gestion de Projets',
+        'en': 'Project Management',
+        'ar': 'إدارة المشاريع'
+    },
+    'Ingénierie': {
+        'fr': 'Ingénierie',
+        'en': 'Engineering',
+        'ar': 'هندسة'
+    },
+    'Achats': {
+        'fr': 'Achats',
+        'en': 'Procurement',
+        'ar': 'مشتريات'
+    },
+    'Excellence Opérationnelle': {
+        'fr': 'Excellence Opérationnelle',
+        'en': 'Operational Excellence',
+        'ar': 'التميز التشغيلي'
+    }
+}
+
 # Initialisation des variables de session
 if 'selected_products' not in st.session_state:
     st.session_state.selected_products = []
@@ -319,14 +492,24 @@ if 'forms' not in st.session_state:
             'url': 'https://zfrmz.com/bEuwz08buVRD52deDgpb',
             'department': 'Informatique'
         },
+       # {
+        #    'name': 'Demande de Formulaire',
+         #   'url': 'https://zfrmz.com/3vqoalYB2gp4uejgBK29',
+          #  'department': 'Informatique'
+        #},
         {
             'name': 'Rapport Technique',
             'url': 'https://zfrmz.com/hnxgBvtyTnP8ymEofkMH',
             'department': 'Technique'
         },
         {
-            'name': 'Demande Produits au Chantier  OU Retour de Produits du Chantier au Dépôt',
+            'name': 'Demande Produits / Équipements / Outils au chantier',
             'url': 'https://zfrmz.com/h2GHZod7VUhVMhThLZi7',
+            'department': 'Technique'
+        },
+        {
+            'name': 'Demande de Retour de Produits du Chantier au Dépôt',
+            'url': 'https://zfrmz.com/j2h8tXRElt7RdA5igKXU',
             'department': 'Technique'
         },
         {
@@ -334,6 +517,11 @@ if 'forms' not in st.session_state:
             'url': 'https://zfrmz.com/gagnnRFcU8CuwCuwCuwC',
             'department': 'Commercial'
         },
+        #{
+         #   'name': 'Demande de Visite Chantier',
+          #  'url': 'https://zfrmz.com/DSOMs9vrV6G4wI14DBl0',
+           # 'department': 'Commercial'
+        #},
         {
             'name': 'Demande de Frais de Déplacement & Ordre de Mission',
             'url': 'https://zfrmz.com/Te6XEXGxjKW80et1mht0',
@@ -400,7 +588,7 @@ if 'forms' not in st.session_state:
             'department': 'Commercial'
         },
         {
-            'name': 'Réclamation Fournisseurs / Banques / Autres Partenaires',
+            'name': 'Réclamation Fournisseurs / Banques / Autres Partenaires',
             'url': 'https://zfrmz.com/Te6XEXGxjKW80et1mht0',
             'department': 'Achats'
         },
@@ -425,6 +613,18 @@ if 'current_page_nav' not in st.session_state:
 
 def get_text(key, lang='fr'):
     return translations[lang].get(key, key)
+
+def get_form_name(form_name, lang='fr'):
+    """Obtenir le nom du formulaire traduit"""
+    if form_name in form_translations:
+        return form_translations[form_name].get(lang, form_name)
+    return form_name
+
+def get_department_name(department, lang='fr'):
+    """Obtenir le nom du département traduit"""
+    if department in department_translations:
+        return department_translations[department].get(lang, department)
+    return department
 
 def create_logo():
     with open("logo_CM.png", "rb") as f:
@@ -652,12 +852,24 @@ def show_forms_page(lang):
    # st.markdown(f"## 📋 {get_text('forms', lang)}")
     # Logo et en-tête
     st.markdown(create_logo(), unsafe_allow_html=True)
+    
+    # Sélecteur de langue
+    col1, col2, col3 = st.columns([3, 1, 1])
+    with col3:
+        lang = st.selectbox(
+            "🌐",
+            ['fr', 'en', 'ar'],
+            format_func=lambda x: {'fr': 'Français', 'en': 'English', 'ar': 'العربية'}[x],
+            key="lang_forms"
+        )
 
+    # Titre principal
     st.markdown(f"""
     <div class="main-header">
         <h1>{get_text('forms', lang)}</h1>
     </div>
     """, unsafe_allow_html=True)
+    
     # Filtres
     col1, col2 = st.columns(2)
     
@@ -665,14 +877,17 @@ def show_forms_page(lang):
     with col1:
         form_search = st.text_input(
             f"🔍 {get_text('filter_form', lang)}",
-            placeholder="Rechercher un formulaire..."
+            placeholder=get_text('filter_form', lang)
         )
 
     with col2:
-        departments = [get_text('all_departments', lang)] + list(set(form['department'] for form in st.session_state.forms))
+        # Obtenir tous les départements uniques traduits
+        unique_departments = list(set(form['department'] for form in st.session_state.forms))
+        departments_options = [get_text('all_departments', lang)] + [get_department_name(dept, lang) for dept in unique_departments]
+        
         selected_department = st.selectbox(
             get_text('department_filter', lang),
-            departments
+            departments_options
         )
     
     # Filtrer les formulaires
@@ -680,24 +895,36 @@ def show_forms_page(lang):
     
     # Filtre par département
     if selected_department != get_text('all_departments', lang):
-        filtered_forms = [form for form in filtered_forms if form['department'] == selected_department]
+        # Trouver le département original en français
+        original_department = None
+        for dept in unique_departments:
+            if get_department_name(dept, lang) == selected_department:
+                original_department = dept
+                break
+        
+        if original_department:
+            filtered_forms = [form for form in filtered_forms if form['department'] == original_department]
     
     # Filtre par recherche de texte
     if form_search:
         search_term = form_search.lower().strip()
         filtered_forms = [form for form in filtered_forms 
-                         if search_term in form['name'].lower() 
-                         or search_term in form['department'].lower()]
+                         if search_term in get_form_name(form['name'], lang).lower() 
+                         or search_term in get_department_name(form['department'], lang).lower()]
     
     # Afficher les formulaires filtrés
     st.markdown(f"### {get_text('available_forms', lang)}")
     
     if filtered_forms:
         for i, form in enumerate(filtered_forms):
+            translated_name = get_form_name(form['name'], lang)
+            translated_dept = get_department_name(form['department'], lang)
+            
             with st.container():
                 st.markdown(f"""
                 <div class="form-card">
-                    <h4><a href="{form['url']}" target="_blank" class="form-link">{form['name']}</a></h4>
+                    <h4><a href="{form['url']}" target="_blank" class="form-link">{translated_name}</a></h4>
+                    <p style="color: #666; margin: 0; font-size: 14px;">📂 {translated_dept}</p>
                 </div>
                 """, unsafe_allow_html=True)
     else:
