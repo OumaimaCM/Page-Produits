@@ -519,7 +519,7 @@ if 'forms' not in st.session_state:
         },
         {
             'name': 'Demande de Service (Intervention/Réclamations)',
-            'url': 'https://zfrmz.com/JWKNUFME9YEngkQ4tFIb',
+            'url': 'https://zfrmz.com/gagnnRFcU8CuwCuwCuwC',
             'department': 'Commercial'
         },
         #{
@@ -594,7 +594,7 @@ if 'forms' not in st.session_state:
         },
         {
             'name': 'Réclamation Fournisseurs / Banques / Autres Partenaires',
-            'url': 'https://zfrmz.com/Te6XEXGxjKW80et1mht0',
+            'url': 'https://zfrmz.com/JWKNUFME9YEngkQ4tFIb',
             'department': 'Achats'
         },
         {
