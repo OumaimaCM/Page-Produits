@@ -322,10 +322,15 @@ form_translations = {
         'en': 'Technical Report',
         'ar': 'تقرير فني'
     },
-    'Demande Produits au Chantier  OU Retour de Produits du Chantier au Dépôt': {
-        'fr': 'Demande Produits au Chantier OU Retour de Produits du Chantier au Dépôt',
-        'en': 'Product Request to Site OR Product Return from Site to Warehouse',
-        'ar': 'طلب منتجات للموقع أو إرجاع المنتجات من الموقع إلى المستودع'
+    'Demande Produits / Équipements / Outils au chantier': {
+        'fr': 'Demande Produits / Équipements / Outils au chantier',
+        'en': 'Request for Products / Equipment / Tools to the Construction Site',
+        'ar': 'طلب منتجات / معدات / أدوات إلى موقع الورشة'
+    },
+    'Demande de Retour de Produits du Chantier au Dépôt': {
+        'fr': 'Demande de Retour de Produits du Chantier au Dépôt',
+        'en': 'Request for Return of Products from the Construction Site to the Warehouse',
+        'ar': 'طلب إرجاع المنتجات من موقع الورشة إلى المستودع'
     },
     'Demande de Service (Intervention/Réclamations)': {
         'fr': 'Demande de Service (Intervention/Réclamations)',
